@@ -259,7 +259,6 @@ for (let usuariosDos of reduccionDos){
   }
 }
 
-
 // ----------- SACO UN ARRAY CON LOS VALORES SIN REPETIR ----------------
 const Duplicates = (mixed) =>  {
   const result = [];
@@ -306,6 +305,53 @@ console.log(valoresVolume)
 console.log(contadorVolume);
 
 
+
+/*------------------------------------------------------------------------
+ --------------------**iteración #4: Mix Fors----------------------------
+ -----------------------------------------------------------------------*/
+
+ /*Crea una función llamada `findArrayIndex` que reciba como parametros un array de textos 
+ y un texto y devuelve la posición del array cuando el valor del array sea igual al valor del 
+ texto que enviaste como parametro. Haz varios ejemplos y compruebalos.*/
+
+ //const findArrayIndex =(array, text)=> {
+
+  let animales= ["Caracol", "Mosquito", "Salamandra", "Ajolote"];
+
+  const findArrayIndex =(array, text)=>{
+    array.forEach ((element, index)=>{
+      element==text?
+        console.log(`Esta en la posicion ${index}`)
+        : "";
+      })
+  }
+  findArrayIndex (animales, "Caracol")
+
+  findArrayIndex(animales, "Mosqui")
+
+  findArrayIndex (animales, "Salamandra")
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+ 
+ 
+
+
+
+
+
+ 
 
 
 
