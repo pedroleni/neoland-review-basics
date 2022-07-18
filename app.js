@@ -48,7 +48,7 @@ categorias= emoveDuplicates(categoriasRepetidas);
 console.log(categorias);
 
 /*------------------------------------------------------------------------
- ---------------**iteración #2: Iteración #2: Mix Fors-----------------------
+ ---------------**iteración #2:  Mix Fors-----------------------
  -----------------------------------------------------------------------*/
 
  /**Dado el siguiente javascript usa forof y forin para hacer la media del volumen 
@@ -164,6 +164,148 @@ media =average(valores2);
 
 
 console.log("La media de sonido de todos los usuarios total es: "+media);
+
+console.log(valores2)
+
+
+
+
+/*------------------------------------------------------------------------
+ ---------------**iteración #3: Mix Fors----------------------------------
+ -----------------------------------------------------------------------*/
+
+ 
+
+ /*Dado el siguiente javascript usa forof y forin para saber cuantas veces ha sido cada sonido agregado por los usuarios a favorito.
+  Para ello recorre la lista de usuarios y usa forin para recoger el nombre de los sonidos que el usuario tenga como favoritos.
+ Una vez accedas a ellos piensa en la mejor forma de hacer un conteo de cada vez que ese sonido 
+ se repita como favorito en cada usuario.
+ 
+ Este ejercicio es un poco complicado con los conocimientos actuales pero...
+ a la vez un buen reto y oportunidad para comprender que hay muchas formas de hacer las cosas en javascript.*/
+ 
+
+ let users2 = [
+   {
+     name: "Manolo el del bombo",
+     favoritesSounds: {
+       waves: { format: "mp3", volume: 50 },
+       rain: { format: "ogg", volume: 60 },
+       firecamp: { format: "mp3", volume: 80 },
+     },
+   },
+   {
+     name: "Mortadelo",
+     favoritesSounds: {
+       waves: { format: "mp3", volume: 30 },
+       shower: { format: "ogg", volume: 55 },
+       train: { format: "mp3", volume: 60 },
+     },
+   },
+   {
+     name: "Super Lopez",
+     favoritesSounds: {
+       shower: { format: "mp3", volume: 50 },
+       train: { format: "ogg", volume: 60 },
+       firecamp: { format: "mp3", volume: 80 },
+     },
+   },
+   {
+     name: "El culebra",
+     favoritesSounds: {
+       waves: { format: "mp3", volume: 67 },
+       wind: { format: "ogg", volume: 35 },
+       firecamp: { format: "mp3", volume: 60 },
+     },
+   },
+ ];
+
+//EJERCICIO PARECIDO AL ANTERIOR -------- SACO LOS VALORES PRIMERO DE LOS VOLUMENES TOTALES Y LOS GUARDO EN ARRAY valoresVolume
+ let reduccionDos = [];
+ let x =-1; 
+ let valoresVolume =[] ;
+
+
+ //----------------ARRAY COMPLETO ----------------------
+//recorremos los usuarios
+for (let usuarios of users2){
+  //recorremos los objetos
+  // tiene las propiedades de favoritesSounds y name
+  for ( let key in usuarios){ 
+      //nos paramos en el objeto favoritesSounds
+          reduccionDos.push(usuarios[key]) ;      
+  }
+}
+
+
+
+// ----------------ARRAY REDUCCIDO --------------------
+for (let usuariosDos of reduccionDos){
+  for ( caracteristicas in usuariosDos){
+      for (let valores in usuariosDos[caracteristicas] ){
+          if (valores =="volume"){
+              x++;
+              //LE DAMOS LOS VALUES DE VOLUME a una variable 
+              let volumeValor=(usuariosDos[caracteristicas][valores]);
+
+              //Añadir valor a la posicion [i] de valores2
+              // i se ira incrementando cada vez pase por el if
+              // i esta inicializada en -1 para cuando se incremente por primera vez coja el valor 0
+              //VALOR 0 siendo la primera posicion del array
+              
+              valoresVolume [x] = volumeValor;
+          }
+      }
+  }
+}
+
+
+// ----------- SACO UN ARRAY CON LOS VALORES SIN REPETIR ----------------
+const Duplicates = (mixed) =>  {
+  const result = [];
+  mixed.forEach ((item)=>{
+    if(!result.includes(item)){
+      result.push(item);}
+  })
+
+  return result;
+}
+
+// CREO UN ARRAY PARA SABER QUE DATOS SIN REPETIR HAY PARA LUEGO CONTAR LOS REPETIDOS QUE HAY EN ARRAY CON LOS VALORES REPETIDOS
+let  noDuplicate =Duplicates(valoresVolume);
+
+
+// CREO UN ARRAY PARA QUE ME GUARDE LOS VALORES DE CUANTAS VECES ESTA REPETIDO ESE VALOR
+let contadorVolume = [];
+
+// EL S ME SERVIRA PARA LUEGO PONER EL INDICE DE contadorVolume y asi guardar los valores
+let s=-1
+
+
+//me creo ccc que me servira para contar el numero de veces se repite el valor de volumen
+let ccc
+noDuplicate.forEach((volumenIndividual)=>{
+  //contador lo incializo a 0 para que cuando coja otro valor de volumen empiece a contar de nuevo. 
+  ccc=0;
+  
+  // s es el indice del array que almacena los resultados cada vez que pase por aqui le damos el valor +1 para que grabe en la siguiente posicion
+  s++;
+  valoresVolume.forEach((elementos)=>{
+    if (volumenIndividual==elementos){
+      ccc++
+    }
+
+  })
+  // Almaceno los resultador en un array 
+  contadorVolume [s]=  "Para el volumen "+volumenIndividual+": "+ccc;
+})
+console.log("Los valores a buscar son: ")
+console.log(noDuplicate)
+console.log("Los valores en total son: ")
+console.log(valoresVolume)
+console.log(contadorVolume);
+
+
 
 
 
