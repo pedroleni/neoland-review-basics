@@ -23,12 +23,12 @@ for (peliculas of movies){
     //recorremos el objeto dentro del array 
     for (key in peliculas ){
         //cuando la key sea categories nos metemos dentro solo en estas keys
-        if (key=="categories"){
+        
             //los valores de categories los recorremos y los push en el array con todos los repetidos
-            peliculas[key].forEach((categoria) =>{
+            peliculas["categories"].forEach((categoria) =>{
                 categoriasRepetidas.push(categoria);
             })
-        }
+        
     }
 }
 //creamos funcion para los valores repetidos
@@ -342,15 +342,38 @@ console.log(contadorVolume);
 
 
 const rollDice =(caras)=>{
-
+  //La función Math.random() nos proporciona un número aleatorio entre 0 y 1, incluido el cero y excluido el 1.
+  //La función Math.floor toma la parte entera de un número. No redondea, sino que toma la parte entera.
   aleatorio=Math.floor(Math.random()*caras)+1;
-
   return aleatorio
-
 }
 
 console.log (rollDice(7));
 
+/*------------------------------------------------------------------------
+ --------------------**iteración #6 : Función swap ------------------------
+ -----------------------------------------------------------------------*/
+
+
+
+
+/*Crea una función llamada `swap()` que reciba un array y dos parametros que sean indices del array. 
+La función deberá intercambiar la posición de los valores de los 
+indices que hayamos enviado como parametro. Retorna el array resultante.*/
+
+
+
+let arrays= ['Mesirve', 'Cristiano Romualdo', 'Fernando Muralla', 'Ronalguiño']
+const swap =(array, indiceUno, indiceDos)=>{
+//guardaos el valor del indiceUno ya que cuando le asignems el de indeceDos ya no trendremos acceso al valor inicial 
+ let cambioUno = array[indiceUno];
+ array[indiceUno]= array[indiceDos];
+ array[indiceDos]= cambioUno;
+  return array
+ 
+}
+//Se intercambia el 1 por el 2 y el 2 por el 1
+console.log (swap(arrays, 1, 2));
 
 
 
