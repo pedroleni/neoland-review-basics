@@ -91,54 +91,18 @@ console.log(categorias);
  ];
 
 
-
-
-//ARRAY reduccion --como hay anidados varios objetos lo voy a reducir para comprender mejor el codigo
-let reducion=[];
-
-//ARRAY valores2 --aqui guardare todos los valores de los volumenes
-let valores2=[];
-
-
-//VARIABLE volumeValor --- para almacenar el valor leido del bucle y lo utilizare para guardarlo luego en valores2 
-let volumeValor
-
 //VARIABLE media --- para guardar la media aritmetica de todos los valores
 let media;
 
-//VARIABLE i --- se utlizara para referenciar la posicion de array valores2
-let i=-1
-
-//----------------ARRAY COMPLETO ----------------------
-//recorremos los usuarios
- for (let usuarios of users){
-    //recorremos los objetos
-    // tiene las propiedades de favoritesSounds y name
-    for ( let key in usuarios){ 
-        //nos paramos en el objeto favoritesSounds
-            reducion.push(usuarios[key]) ;      
-    }
+let totalSum =[];
+for (usuarios of users){
+  for (key in usuarios.favoritesSounds){
+    totalSum.push(usuarios.favoritesSounds[key].volume)
+  }
 }
 
-// ----------------ARRAY REDUCCIDO --------------------
-for (let usuariosDos of reducion){
-    for ( caracteristicas in usuariosDos){
-        for (let valores in usuariosDos[caracteristicas] ){
-            if (valores =="volume"){
-                i++;
-                //LE DAMOS LOS VALUES DE VOLUME a una variable 
-                let volumeValor=(usuariosDos[caracteristicas][valores]);
+console.log(totalSum)
 
-                //Añadir valor a la posicion [i] de valores2
-                // i se ira incrementando cada vez pase por el if
-                // i esta inicializada en -1 para cuando se incremente por primera vez coja el valor 0
-                //VALOR 0 siendo la primera posicion del array
-                
-                valores2 [i] = volumeValor;
-            }
-        }
-    }
-}
 // ------------ FUNCION DE SUMAR TODOS------------------
 const sumAll = (listNumbers) => {
  
@@ -151,8 +115,6 @@ const sumAll = (listNumbers) => {
     return contador;
   }
 
-
-
 // -------------FUNCION DE LA MEDIA DE TODOS LOS VALORES -----
 const average = (listN) => {
     //Reutilizamos la función del ejercicio anterior 
@@ -160,21 +122,13 @@ const average = (listN) => {
 }
 
 // ------------ LANZAMOS LA FUNCION average, con los valores de array valores2
-media =average(valores2);
-
+media =average(totalSum);
 
 console.log("La media de sonido de todos los usuarios total es: "+media);
-
-console.log(valores2)
-
-
-
 
 /*------------------------------------------------------------------------
  ---------------**iteración #3: Mix Fors----------------------------------
  -----------------------------------------------------------------------*/
-
- 
 
  /*Dado el siguiente javascript usa forof y forin para saber cuantas veces ha sido cada sonido agregado por los usuarios a favorito.
   Para ello recorre la lista de usuarios y usa forin para recoger el nombre de los sonidos que el usuario tenga como favoritos.
@@ -220,44 +174,16 @@ console.log(valores2)
    },
  ];
 
-//EJERCICIO PARECIDO AL ANTERIOR -------- SACO LOS VALORES PRIMERO DE LOS VOLUMENES TOTALES Y LOS GUARDO EN ARRAY valoresVolume
- let reduccionDos = [];
- let x =-1; 
- let valoresVolume =[] ;
-
-
- //----------------ARRAY COMPLETO ----------------------
-//recorremos los usuarios
-for (let usuarios of users2){
-  //recorremos los objetos
-  // tiene las propiedades de favoritesSounds y name
-  for ( let key in usuarios){ 
-      //nos paramos en el objeto favoritesSounds
-          reduccionDos.push(usuarios[key]) ;      
-  }
-}
-
-
-
-// ----------------ARRAY REDUCCIDO --------------------
-for (let usuariosDos of reduccionDos){
-  for ( caracteristicas in usuariosDos){
-      for (let valores in usuariosDos[caracteristicas] ){
-          if (valores =="volume"){
-              x++;
-              //LE DAMOS LOS VALUES DE VOLUME a una variable 
-              let volumeValor=(usuariosDos[caracteristicas][valores]);
-
-              //Añadir valor a la posicion [i] de valores2
-              // i se ira incrementando cada vez pase por el if
-              // i esta inicializada en -1 para cuando se incremente por primera vez coja el valor 0
-              //VALOR 0 siendo la primera posicion del array
-              
-              valoresVolume [x] = volumeValor;
-          }
-      }
-  }
-}
+// RECORREMOS .-----------
+ let valoresVolume =[];
+ for (usuarios of users){
+   for (key in usuarios.favoritesSounds){
+     valoresVolume.push(usuarios.favoritesSounds[key].volume)
+   }
+ }
+ 
+ console.log(valoresVolume)
+ 
 
 // ----------- SACO UN ARRAY CON LOS VALORES SIN REPETIR ----------------
 const Duplicates = (mixed) =>  {
@@ -273,16 +199,13 @@ const Duplicates = (mixed) =>  {
 // CREO UN ARRAY PARA SABER QUE DATOS SIN REPETIR HAY PARA LUEGO CONTAR LOS REPETIDOS QUE HAY EN ARRAY CON LOS VALORES REPETIDOS
 let  noDuplicate =Duplicates(valoresVolume);
 
-
 // CREO UN ARRAY PARA QUE ME GUARDE LOS VALORES DE CUANTAS VECES ESTA REPETIDO ESE VALOR
 let contadorVolume = [];
-
 // EL S ME SERVIRA PARA LUEGO PONER EL INDICE DE contadorVolume y asi guardar los valores
 let s=-1
-
-
 //me creo ccc que me servira para contar el numero de veces se repite el valor de volumen
 let ccc
+
 noDuplicate.forEach((volumenIndividual)=>{
   //contador lo incializo a 0 para que cuando coja otro valor de volumen empiece a contar de nuevo. 
   ccc=0;
@@ -303,7 +226,6 @@ console.log(noDuplicate)
 console.log("Los valores en total son: ")
 console.log(valoresVolume)
 console.log(contadorVolume);
-
 
 
 /*------------------------------------------------------------------------
@@ -340,23 +262,29 @@ console.log(contadorVolume);
  un numero aleatorio no te preocupes! busca información sobre la función de javascript **Math.random();**/
 
 
+//forma 1
+const rollDice =(caras)=>{console.log(parseInt(Math.random()*caras))}
 
-const rollDice =(caras)=>{
+
+//forma 2
+
+const rollDice2 =(caras)=>{console.log(Math.floor(Math.random()*caras)+1)
+
+
+
+
   //La función Math.random() nos proporciona un número aleatorio entre 0 y 1, incluido el cero y excluido el 1.
   //La función Math.floor toma la parte entera de un número. No redondea, sino que toma la parte entera.
-  aleatorio=Math.floor(Math.random()*caras)+1;
-  return aleatorio
 }
+rollDice(8)
 
-console.log (rollDice(7));
+rollDice2(6)
+
+
 
 /*------------------------------------------------------------------------
  --------------------**iteración #6 : Función swap ------------------------
  -----------------------------------------------------------------------*/
-
-
-
-
 /*Crea una función llamada `swap()` que reciba un array y dos parametros que sean indices del array. 
 La función deberá intercambiar la posición de los valores de los 
 indices que hayamos enviado como parametro. Retorna el array resultante.*/
